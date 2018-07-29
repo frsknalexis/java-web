@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Inventory System</title>
+    <link rel="icon" type="text/css" href="../imagenes/icono-negro.png"></link>
+    <h:outputStylesheet name="./css/Layout.css"/>
+    
+    <!--===================================================
+      PLUGINS DE CSS
+  ====================================================-->
+    <link rel="StyleSheet" type="text/css" href="../bootstrap/css/bootstrap.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/Ionicons/css/ionicons.min.css" media="screen"></link>
+    <!-- Theme style -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/AdminLTE.css"></link>
+    <!-- AdminLTE Skins. -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/skins/_all-skins.min.css"></link>
+    <!-- DataTables-->
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/responsive.bootstrap.min.css"></link>
+   <!-- iCheck for checkboxes and radio inputs -->
+   <link rel="StyleSheet" type="text/css" href="../plugins/iCheck/all.css"></link>
+   <!--===================================================
+      PLUGINS DE JAVASCRIPT
+    ====================================================-->
+     <!-- jQuery 3 -->
+  <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- SlimScroll -->
+  <script type="text/javascript" src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script type="text/javascript" src="../bower_components/fastclick/lib/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script type="text/javascript" src="../dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <!-- DataTables-->
+  <script type="text/javascript" src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" src="../bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="../bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+  <!--Sweet Alert 2-->
+  <script type="text/javascript" src="../plugins/sweetalert2/sweetalert2.all.js"></script>
+  <!-- iCheck 1.0.1 -->
+<script type="text/javascript" src="../plugins/iCheck/icheck.min.js"></script>
+<!-- InputMask -->
+<script type="text/javascript" src="../plugins/input-mask/jquery.inputmask.js"></script>
+<script type="text/javascript" src="../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script type="text/javascript" src="../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!--jQuery Number-->
+<script type="text/javascript" src="../plugins/jQueryNumber/jquerynumber.min.js"></script>
+   
+</h:head>
+<h:body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
+<div id="back"></div>
+<h:form>
+<p:menubar>
+<p:submenu label="Inicio" icon="ui-icon-document">
+<p:menuitem value="Pagina Inicio" url="#"/>
+<p:separator />
+<p:menuitem value="Salir" url="../login.xhtml" />
+</p:submenu>
+<p:submenu label="Usuarios" icon="ui-icon-pencil">
+<p:menuitem value="USUARIOS" action="/xhtml/ListarUsuarios.xhtml" actionListener="#{usuariosBean.listarUsuariosGeneral}" icon="ui-icon-arrowreturnthick-1-w" ajax="true"/>
+</p:submenu>
+<p:submenu label="Categorias" icon="ui-icon-pencil">
+<p:menuitem value="CATEGORIAS" action="/xhtml/ListarCategorias.xhtml" actionListener="#{categoriasBean.listarCategoriasGeneral}"  icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Proveedores" icon="ui-icon-pencil">
+<p:menuitem value="PROVEEDORES" action="/xhtml/ListarProveedores.xhtml" actionListener="#{proveedoresBean.listarProveedoresGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Productos" icon="ui-icon-pencil">
+<p:menuitem value="PRODUCTOS" url="/xhtml/ListarProductos.xhtml" actionListener="#{productosBean.listarProductosGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Clientes" icon="ui-icon-pencil">
+<p:menuitem value="CLIENTES" action="/xhtml/ListarClientes.xhtml" actionListener="#{clientesBean.listarClientesGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Ventas" icon="ui-icon-help">
+<p:menuitem value="VENTAS" action="LISTAR_VENTAS" icon="ui-icon-arrowreturnthick-1-w" />
+<p:menuitem value="CREAR VENTA" url="/xhtml/CrearVenta.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+</p:menubar>
+</h:form>
+</h:body>
+</html>

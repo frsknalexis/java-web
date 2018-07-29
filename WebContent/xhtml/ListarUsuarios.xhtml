@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Usuarios</title>
+    <link rel="icon" type="text/css" href="../imagenes/icono-negro.png"></link>
+    <h:outputStylesheet name="./css/Layout.css" />
+    
+     <!--===================================================
+      PLUGINS DE CSS
+  ====================================================-->
+    <link rel="StyleSheet" type="text/css" href="../bootstrap/css/bootstrap.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/Ionicons/css/ionicons.min.css" media="screen"></link>
+    <!-- Theme style -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/AdminLTE.css"></link>
+    <!-- AdminLTE Skins. -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/skins/_all-skins.min.css"></link>
+    <!-- DataTables-->
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/responsive.bootstrap.min.css"></link>
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="StyleSheet" type="text/css" href="../plugins/iCheck/all.css"></link>
+   
+</h:head>
+<h:body class="login-page">
+<div id="back"></div>
+<h:form>
+<p:menubar>
+<p:submenu label="Inicio" icon="ui-icon-document">
+<p:menuitem value="Pagina Inicio" url="/xhtml/principal.xhtml"/>
+<p:separator />
+<p:menuitem value="Salir" url="../login.xhtml" />
+</p:submenu>
+<p:submenu label="Usuarios" icon="ui-icon-pencil">
+<p:menuitem value="USUARIOS" url="/xhtml/ListarUsuarios.xhtml" actionListener="#{usuariosBean.listarUsuariosGeneral}" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Categorias" icon="ui-icon-pencil">
+<p:menuitem value="CATEGORIAS" url="/xhtml/ListarCategorias.xhtml" actionListener="#{categoriasBean.listarCategoriasGeneral}"  icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Proveedores" icon="ui-icon-pencil">
+<p:menuitem value="PROVEEDORES" url="/xhtml/ListarProveedores.xhtml" actionListener="#{proveedoresBean.listarProveedoresGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Productos" icon="ui-icon-pencil">
+<p:menuitem value="PRODUCTOS" url="/xhtml/ListarProductos.xhtml" actionListener="#{productosBean.listarProductosGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Clientes" icon="ui-icon-pencil">
+<p:menuitem value="CLIENTES" url="/xhtml/ListarClientes.xhtml" actionListener="#{clientesBean.listarClientesGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Ventas" icon="ui-icon-help">
+<p:menuitem value="VENTAS" action="LISTAR_VENTAS" icon="ui-icon-arrowreturnthick-1-w" />
+<p:menuitem value="CREAR VENTA" url="/xhtml/CrearVenta.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+</p:menubar>
+</h:form>
+<h:form>
+<p:commandButton value="Agregar Usuario" styleClass="btn btn-info" icon="ui-icon-script"  oncomplete="PF('dialogAgregarVendedor').show()" update="formAgregarVendedor" />
+</h:form>
+<h:form id="form2">
+<table align="center">
+<tr>
+<td>
+<p:dataTable style="width:100%" rows="10" var="lista1" value="#{usuariosBean.listaCargadaTodo}" paginator="true">
+<f:facet name="header">
+<h:outputText value="Listado de Usuarios"/>
+</f:facet>
+<p:column>
+<f:facet name="header"><h:outputText value="ID"/></f:facet>
+<h:outputText value="#{lista1.id_usuario}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Nombre Usuario"/>
+</f:facet>
+<h:outputText value="#{lista1.nombres}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Usuario"/></f:facet>
+<h:outputText value="#{lista1.usuario}"></h:outputText>
+
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Estado"/></f:facet>
+<h:outputText value="#{lista1.estado}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Perfil"/></f:facet>
+<h:outputText value="#{lista1.perfil}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Fecha Registro"/></f:facet>
+<h:outputText value="#{lista1.fecha_registro}">
+<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+</h:outputText>
+</p:column>
+<p:column colspan="2">
+<f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+<p:commandButton colspan="2" value="Modificar" oncomplete="PF('dialogModificarVendedor').show()" update="formModificarVendedor">
+<f:setPropertyActionListener target="#{usuariosBean.usu}" value="#{lista1}"></f:setPropertyActionListener>
+</p:commandButton>
+<p:commandButton colspan="2" value="Eliminar" oncomplete="PF('dialogEliminarVendedor').show()" update="formEliminarVendedor">
+<f:setPropertyActionListener target="#{usuariosBean.usu}" value="#{lista1}"></f:setPropertyActionListener>
+</p:commandButton>
+</p:column>
+</p:dataTable>
+</td>
+</tr>
+</table>
+</h:form>
+<h:form id="formAgregarVendedor">
+<p:dialog id="dlgAgregarVendedor" header="Agregar Usuarios" widgetVar="dialogAgregarVendedor" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+<p:panelGrid columns="2" align="center">
+<p:outputLabel value="Nombres"/>
+<p:inputText value="#{usuariosBean.usu.nombres}"/>
+<p:outputLabel value="Usuario"/>
+<p:inputText value="#{usuariosBean.usu.usuario}"/>
+<p:outputLabel value="Contraseña"/>
+<p:password id="pwd1" value="#{usuariosBean.usu.password}" placeholder="Ingrese su Contraseña" feedback="false" match="pwd2" required="true"/>
+<p:outputLabel value="Confirmar Contraseña"/>
+<p:password id="pwd2" value="#{usuariosBean.usu.password}" placeholder="Confirmar Contraseña" feedback="false" required="true"/>
+<p:outputLabel value="Perfil"/>
+<p:inputText value="#{usuariosBean.usu.perfil}"/>
+<p:outputLabel value="Estado"/>
+<p:selectOneMenu value="#{usuariosBean.usu.estado}">
+<f:selectItem itemLabel="--Seleccione un Estado--" itemValue="-1"></f:selectItem>
+<f:selectItem itemLabel="Desactivado" itemValue="Desactivado"></f:selectItem>
+<f:selectItem itemLabel="Activado" itemValue="Activado"></f:selectItem>
+</p:selectOneMenu>
+<p:outputLabel value="Fecha De Registro"/>
+<p:calendar value="#{usuariosBean.usu.fecha_registro}" mode="popup" showOn="button" popupIconOnly="true" pattern="dd/MM/yyyy"></p:calendar>
+</p:panelGrid>
+<p:commandButton value="Registrar" icon="ui-icon-disk" styleClass="btn btn-primary pull-left" actionListener="#{usuariosBean.agregarUsuarios}" action="#{usuariosBean.listarUsuariosGeneral}" update="form2" oncomplete="PF('dialogAgregarVendedor').hide()"/>
+<p:commandButton value="Cancelar" styleClass="btn btn-default pull-right"  oncomplete="PF('dialogAgregarVendedor').hide()"/>
+</p:dialog>
+</h:form>
+
+<h:form id="formModificarVendedor">
+<p:dialog id="dlgModificarVendedor" widgetVar="dialogModificarVendedor" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+<p:panelGrid columns="2" align="center">
+<p:outputLabel value="Nombres"/>
+<p:inputText value="#{usuariosBean.usu.nombres}"/>
+<p:outputLabel value="Usuario"/>
+<p:inputText value="#{usuariosBean.usu.usuario}"/>
+<p:outputLabel value="Contraseña"/>
+<p:password id="pwd1" value="#{usuariosBean.usu.password}" placeholder="Ingrese su Contraseña" feedback="false" match="pwd2" required="true"/>
+<p:outputLabel value="Confirmar Contraseña"/>
+<p:password id="pwd2" value="#{usuariosBean.usu.password}" placeholder="Confirmar Contraseña" feedback="false" required="true"/>
+<p:outputLabel value="Perfil"/>
+<p:inputText value="#{usuariosBean.usu.perfil}"/>
+<p:outputLabel value="Estado"/>
+<p:selectOneMenu value="#{usuariosBean.usu.estado}">
+<f:selectItem itemLabel="--Seleccione un Estado--" itemValue="-1"></f:selectItem>
+<f:selectItem itemLabel="Desactivado" itemValue="Desactivado"></f:selectItem>
+<f:selectItem itemLabel="Activado" itemValue="Activado"></f:selectItem>
+</p:selectOneMenu>
+<p:outputLabel value="Fecha De Registro"/>
+<p:calendar value="#{usuariosBean.usu.fecha_registro}" mode="popup" showOn="button" popupIconOnly="true" pattern="dd/MM/yyyy"></p:calendar>
+</p:panelGrid>
+<p:commandButton value="Modificar" actionListener="#{usuariosBean.modificarUsuarios}" action="#{usuariosBean.listarUsuariosGeneral}" update="form2" oncomplete="PF('dialogModificarVendedor').hide()"/>
+<p:commandButton value="Cancelar"  oncomplete="PF('dialogModificarVendedor').hide()"/>
+</p:dialog>
+</h:form>
+<h:form id="formEliminarVendedor">
+<p:confirmDialog message="Desea eliminar el registro?" header="Confimar!!" severity="alert" id="dlgEliminarVendedor" widgetVar="dialogEliminarVendedor" resizable="false" showEffect="explode" hideEffect="explode" modal="true" >
+		
+<p:commandButton value="SI" actionListener="#{usuariosBean.eliminarUsuarios}" action="#{usuariosBean.listarUsuariosGeneral}" update="form2" oncomplete="PF('dialogEliminarVendedor').hide()"/>
+<p:commandButton value="NO"  oncomplete="PF('dialogEliminarVendedor').hide()"/>
+</p:confirmDialog>
+</h:form>
+</h:body>
+</html>

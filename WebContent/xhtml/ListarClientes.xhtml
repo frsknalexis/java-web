@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Clientes</title>
+    <link rel="icon" type="text/css" href="../imagenes/icono-negro.png"></link>
+    <h:outputStylesheet name="./css/Layout.css" />
+    
+     <!--===================================================
+      PLUGINS DE CSS
+  ====================================================-->
+    <link rel="StyleSheet" type="text/css" href="../bootstrap/css/bootstrap.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/Ionicons/css/ionicons.min.css" media="screen"></link>
+    <!-- Theme style -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/AdminLTE.css"></link>
+    <!-- AdminLTE Skins. -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/skins/_all-skins.min.css"></link>
+    <!-- DataTables-->
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/responsive.bootstrap.min.css"></link>
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="StyleSheet" type="text/css" href="../plugins/iCheck/all.css"></link>
+   
+</h:head>
+<h:body class="login-page">
+<div id="back"></div>
+<h:form>
+<p:menubar>
+<p:submenu label="Inicio" icon="ui-icon-document">
+<p:menuitem value="Pagina Inicio" url="/xhtml/principal.xhtml"/>
+<p:separator/>
+<p:menuitem value="Salir" url="../login.xhtml" />
+</p:submenu>
+<p:submenu label="Usuarios" icon="ui-icon-pencil">
+<p:menuitem value="USUARIOS" url="/xhtml/ListarUsuarios.xhtml" actionListener="#{usuariosBean.listarUsuariosGeneral}" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Categorias" icon="ui-icon-pencil">
+<p:menuitem value="CATEGORIAS" url="/xhtml/ListarCategorias.xhtml" actionListener="#{categoriasBean.listarCategoriasGeneral}"  icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Proveedores" icon="ui-icon-pencil">
+<p:menuitem value="PROVEEDORES" url="/xhtml/ListarProveedores.xhtml" actionListener="#{proveedoresBean.listarProveedoresGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Productos" icon="ui-icon-pencil">
+<p:menuitem value="PRODUCTOS" url="/xhtml/ListarProductos.xhtml" actionListener="#{productosBean.listarProductosGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Clientes" icon="ui-icon-pencil">
+<p:menuitem value="CLIENTES" url="/xhtml/ListarClientes.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Ventas" icon="ui-icon-help">
+<p:menuitem value="VENTAS" action="LISTAR_VENTAS" icon="ui-icon-arrowreturnthick-1-w" />
+<p:menuitem value="CREAR VENTA" url="/xhtml/CrearVenta.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+</p:menubar>
+</h:form>
+<h:form>
+<p:commandButton value="Agregar Cliente" styleClass="btn btn-info" icon="ui-icon-disk"  oncomplete="PF('dialogAgregarCliente').show()" update="formAgregarCliente" />
+</h:form>
+<h:form id="form2">
+<table align="center">
+<tr>
+<td>
+<p:dataTable style="width:100%" rows="10" var="lista1" value="#{clientesBean.listaClientes}" paginator="true">
+<f:facet name="header">
+<h:outputText value="Listado de Clientes"/>
+</f:facet>
+<p:column>
+<f:facet name="header"><h:outputText value="ID"/></f:facet>
+<h:outputText value="#{lista1.id_cliente}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Nombre Cliente"/>
+</f:facet>
+<h:outputText value="#{lista1.nombre_cliente}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Tipo Documento"/></f:facet>
+<h:outputText value="#{lista1.tipo_documento}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Nro Documento"/></f:facet>
+<h:outputText value="#{lista1.num_documento}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Telefono"/></f:facet>
+<h:outputText value="#{lista1.telefono}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Email"/></f:facet>
+<h:outputText value="#{lista1.email}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Fecha Registro"/></f:facet>
+<h:outputText value="#{lista1.fecha_registro}">
+<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+</h:outputText>
+</p:column>
+<p:column colspan="2">
+<f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+<p:commandButton colspan="2" value="Modificar" oncomplete="PF('dialogModificarCliente').show()" update="formModificarCliente">
+<f:setPropertyActionListener target="#{clientesBean.cl}" value="#{lista1}"></f:setPropertyActionListener>
+</p:commandButton>
+<p:commandButton colspan="2" value="Eliminar" oncomplete="PF('dialogEliminarCliente').show()" update="formEliminarCliente">
+<f:setPropertyActionListener target="#{clientesBean.cl}" value="#{lista1}"></f:setPropertyActionListener>
+</p:commandButton>
+</p:column>
+</p:dataTable>
+</td>
+</tr>
+</table>
+</h:form>
+<h:form id="formAgregarCliente">
+<p:dialog id="dlgAgregarCliente" header="Agregar Cliente" widgetVar="dialogAgregarCliente" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+<p:panelGrid columns="2" align="center">
+<p:outputLabel value="Nombre Cliente"/>
+<p:inputText value="#{clientesBean.cl.nombre_cliente}"/>
+<p:outputLabel value="Tipo Documento"/>
+<p:selectOneMenu value="#{clientesBean.cl.tipo_documento}">
+<f:selectItem itemLabel="--Seleccione un Documento--" itemValue="-1"></f:selectItem>
+<f:selectItem itemLabel="DNI" itemValue="DNI"></f:selectItem>
+<f:selectItem itemLabel="RUC" itemValue="RUC"></f:selectItem>
+</p:selectOneMenu>
+<p:outputLabel value="Numero Documento"/>
+<p:inputText value="#{clientesBean.cl.num_documento}"/>
+<p:outputLabel value="Direccion"/>
+<p:inputText value="#{clientesBean.cl.direccion}"/>
+<p:outputLabel value="Telefono"/>
+<p:inputText value="#{clientesBean.cl.telefono}"/>
+<p:outputLabel value="Email"/>
+<p:inputText value="#{clientesBean.cl.email}"/>
+<p:outputLabel value="Fecha De Registro"/>
+<p:calendar value="#{clientesBean.cl.fecha_registro}" mode="popup" showOn="button" popupIconOnly="true" pattern="dd/MM/yyyy"></p:calendar>
+</p:panelGrid>
+<p:commandButton value="Registrar" icon="ui-icon-disk"  actionListener="#{clientesBean.agregarClientes}" update="form2" oncomplete="PF('dialogAgregarCliente').hide()"/>
+<p:commandButton value="Cancelar" oncomplete="PF('dialogAgregarCliente').hide()"/>
+</p:dialog>
+</h:form>
+
+<h:form id="formModificarCliente">
+<p:dialog id="dlgModificarCliente" widgetVar="dialogModificarCliente" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+<p:panelGrid columns="2" align="center">
+<p:outputLabel value="Nombre Cliente"/>
+<p:inputText value="#{clientesBean.cl.nombre_cliente}"/>
+<p:outputLabel value="Tipo Documento"/>
+<p:selectOneMenu value="#{clientesBean.cl.tipo_documento}">
+<f:selectItem itemLabel="--Seleccione un Documento--" itemValue="-1"></f:selectItem>
+<f:selectItem itemLabel="DNI" itemValue="DNI"></f:selectItem>
+<f:selectItem itemLabel="RUC" itemValue="RUC"></f:selectItem>
+</p:selectOneMenu>
+<p:outputLabel value="Numero Documento"/>
+<p:inputText value="#{clientesBean.cl.num_documento}"/>
+<p:outputLabel value="Direccion"/>
+<p:inputText value="#{clientesBean.cl.direccion}"/>
+<p:outputLabel value="Telefono"/>
+<p:inputText value="#{clientesBean.cl.telefono}"/>
+<p:outputLabel value="Email"/>
+<p:inputText value="#{clientesBean.cl.email}"/>
+<p:outputLabel value="Fecha De Registro"/>
+<p:calendar value="#{clientesBean.cl.fecha_registro}" mode="popup" showOn="button" popupIconOnly="true" pattern="dd/MM/yyyy"></p:calendar>
+</p:panelGrid>
+<p:commandButton value="Modificar" actionListener="#{clientesBean.modificarClientes}" update="form2" oncomplete="PF('dialogModificarCliente').hide()"/>
+<p:commandButton value="Cancelar"   oncomplete="PF('dialogModificarCliente').hide()"/>
+</p:dialog>
+</h:form>
+<h:form id="formEliminarCliente">
+<p:confirmDialog message="¿Desea eliminar el registro de este Cliente?" header="Confimar!!" severity="alert" id="dlgEliminarCliente" widgetVar="dialogEliminarCliente" resizable="false" showEffect="explode" hideEffect="explode" modal="true" >
+		
+<p:commandButton value="SI"  actionListener="#{clientesBean.eliminarClientes}" update="form2" oncomplete="PF('dialogEliminarCliente').hide()"/>
+<p:commandButton value="NO"   oncomplete="PF('dialogEliminarCliente').hide()"/>
+</p:confirmDialog>
+</h:form>
+</h:body>
+</html>

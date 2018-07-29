@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Listado de  Usuario</title>  
+</h:head>
+<h:body>
+<h:form>
+<table align="center" border="2">
+<tr>
+<td colspan="2" align="center"><b>Busqueda de Usuarios por Estado</b></td>
+</tr>
+<tr>
+<td colspan="2">
+<p:dataTable var="lista" value="#{usuariosBean.listaCargadaTodo}">
+<f:facet name="header"><h:outputText value="Listado"></h:outputText></f:facet>
+<p:column>
+<f:facet name="header">Nombres: </f:facet><h:outputText value="#{lista.nombres}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Usuario: </f:facet><h:outputText value="#{lista.usuario}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Estado: </f:facet><h:outputText value="#{lista.estado}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Perfil: </f:facet><h:outputText value="#{lista.perfil}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Fecha Registro: </f:facet><h:outputText value="#{lista.fecha_registro}">
+<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime></h:outputText>
+</p:column>
+<f:facet name="footer">Cantidad de registros: <h:outputText value="#{usuariosBean.tamano_lista}"></h:outputText>
+</f:facet>
+</p:dataTable>
+</td>
+</tr>
+</table>
+</h:form>
+</h:body>
+</html>

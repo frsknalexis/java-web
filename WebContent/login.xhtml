@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Inventory System</title>
+    <link rel="icon" type="text/css" href="imagenes/icono-negro.png"></link>
+    
+    <!--===================================================
+      PLUGINS DE CSS
+  ====================================================-->
+    <link rel="StyleSheet" type="text/css" href="bootstrap/css/bootstrap.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="bower_components/Ionicons/css/ionicons.min.css" media="screen"></link>
+    <!-- Theme style -->
+    <link rel="StyleSheet" type="text/css" href="dist/css/AdminLTE.css"></link>
+    <!-- AdminLTE Skins. -->
+    <link rel="StyleSheet" type="text/css" href="dist/css/skins/_all-skins.min.css"></link>
+    <!-- DataTables-->
+    <link rel="StyleSheet" type="text/css" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+    <link rel="StyleSheet" type="text/css" href="bower_components/datatables.net-bs/css/responsive.bootstrap.min.css"></link>
+   <!-- iCheck for checkboxes and radio inputs -->
+   <link rel="StyleSheet" type="text/css" href="plugins/iCheck/all.css"></link>
+   <!--===================================================
+      PLUGINS DE JAVASCRIPT
+    ====================================================-->
+     <!-- jQuery 3 -->
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- SlimScroll -->
+  <script type="text/javascript" src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script type="text/javascript" src="bower_components/fastclick/lib/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script type="text/javascript" src="dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <!-- DataTables-->
+  <script type="text/javascript" src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" src="bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+  <!--Sweet Alert 2-->
+  <script type="text/javascript" src="plugins/sweetalert2/sweetalert2.all.js"></script>
+  <!-- iCheck 1.0.1 -->
+<script type="text/javascript" src="plugins/iCheck/icheck.min.js"></script>
+<!-- InputMask -->
+<script type="text/javascript" src="plugins/input-mask/jquery.inputmask.js"></script>
+<script type="text/javascript" src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script type="text/javascript" src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!--jQuery Number-->
+<script type="text/javascript" src="plugins/jQueryNumber/jquerynumber.min.js"></script>
+   
+</h:head>
+<h:body class="login-page">
+<div id="back"></div>
+<div class="login-box">
+<div class="login-logo">
+<img src="imagenes/logo-blanco-bloque.png" class="img-responsive" style="padding: 30px 100px 0px 100px;" />
+</div>
+<div class="login-box-body">
+<p class="login-box-msg">Ingresar al Sistema</p>
+<h:form>
+<div class="form-group has-feedback">
+<h:inputText styleClass="form-control" placeholder="Usuario" value="#{usuariosBean.usu.usuario}" />
+<span class="glyphicon glyphicon-user form-control-feedback"></span>
+</div>
+<div class="form-group has-feedback">
+<h:inputSecret styleClass="form-control" placeholder="Contraseña" value="#{usuariosBean.usu.password}" />
+<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+</div>
+<div class="row">
+<div class="col-xs-6">
+<p:commandButton ajax="true" type="submit" value="Ingresar" styleClass="btn btn-primary btn-block btn-flat" action="#{usuariosBean.validarUsuarios}"></p:commandButton>
+</div>
+<div class="col-xs-6">
+<p:commandButton type="reset" value="Limpiar" styleClass="btn btn-info btn-block btn-flat"></p:commandButton>
+</div>
+</div>
+</h:form>
+</div>
+</div>
+<script  type="text/javascript" src="js/plantilla.js"></script>
+</h:body>
+</html>

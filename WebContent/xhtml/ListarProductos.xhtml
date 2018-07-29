@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Productos</title>
+    <link rel="icon" type="text/css" href="../imagenes/icono-negro.png"></link>
+    <h:outputStylesheet name="./css/Layout.css" />
+    
+     <!--===================================================
+      PLUGINS DE CSS
+  ====================================================-->
+    <link rel="StyleSheet" type="text/css" href="../bootstrap/css/bootstrap.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/Ionicons/css/ionicons.min.css" media="screen"></link>
+    <!-- Theme style -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/AdminLTE.css"></link>
+    <!-- AdminLTE Skins. -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/skins/_all-skins.min.css"></link>
+    <!-- DataTables-->
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/responsive.bootstrap.min.css"></link>
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="StyleSheet" type="text/css" href="../plugins/iCheck/all.css"></link>
+   
+</h:head>
+<h:body class="login-page">
+<div id="back"></div>
+<h:form>
+<p:menubar>
+<p:submenu label="Inicio" icon="ui-icon-document">
+<p:menuitem value="Pagina Inicio" url="/xhtml/principal.xhtml"/>
+<p:separator />
+<p:menuitem value="Salir" url="../login.xhtml" />
+</p:submenu>
+<p:submenu label="Usuarios" icon="ui-icon-pencil">
+<p:menuitem value="USUARIOS" url="/xhtml/ListarUsuarios.xhtml" actionListener="#{usuariosBean.listarUsuariosGeneral}" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Categorias" icon="ui-icon-pencil">
+<p:menuitem value="CATEGORIAS" url="/xhtml/ListarCategorias.xhtml" actionListener="#{categoriasBean.listarCategoriasGeneral}"  icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Proveedores" icon="ui-icon-pencil">
+<p:menuitem value="PROVEEDORES" url="/xhtml/ListarProveedores.xhtml" actionListener="#{proveedoresBean.listarProveedoresGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Productos" icon="ui-icon-pencil">
+<p:menuitem value="PRODUCTOS" url="/xhtml/ListarProductos.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Clientes" icon="ui-icon-pencil">
+<p:menuitem value="CLIENTES" url="/xhtml/ListarClientes.xhtml" actionListener="#{clientesBean.listarClientesGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Ventas" icon="ui-icon-help">
+<p:menuitem value="VENTAS" action="LISTAR_VENTAS" icon="ui-icon-arrowreturnthick-1-w" />
+<p:menuitem value="CREAR VENTA" url="/xhtml/CrearVenta.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+</p:menubar>
+</h:form>
+<h:form>
+<p:commandButton value="Agregar Productos" action="#{productosBean.limpiarProducto}" styleClass="btn btn-info" icon="ui-icon-disk"  oncomplete="PF('dialogAgregarProducto').show()" update="formAgregarProducto" />
+</h:form>
+<p:growl id="mensajeGeneral" autoUpdate="true" showDetail="true" life="3000"/>
+<h:form id="form2">
+<table align="center">
+<tr>
+<td>
+<p:dataTable style="width:100%" rows="10" var="lista1" value="#{productosBean.listarProductos}" paginator="true" emptyMessage="No hay datos de productos">
+<f:facet name="header">
+<h:outputText value="Listado de Productos"/>
+</f:facet>
+<p:column>
+<f:facet name="header"><h:outputText value="ID"/></f:facet>
+<h:outputText value="#{lista1.id_producto}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Codigo Producto"/>
+</f:facet>
+<h:outputText value="#{lista1.codigo}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Descripcion Producto"/></f:facet>
+<h:outputText value="#{lista1.descripcion}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Stock"/></f:facet>
+<h:outputText value="#{lista1.stock}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Precio Compra"/></f:facet>
+<h:outputText value="#{lista1.precio_compra}">
+<f:convertNumber type="currency" currencySymbol="S/. " minFractionDigits="2"/>
+</h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Precio Venta"/></f:facet>
+<h:outputText value="#{lista1.precio_venta}">
+<f:convertNumber type="currency" currencySymbol="S/. " minFractionDigits="2"/>
+</h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Estado"/></f:facet>
+<h:outputText value="#{lista1.estado}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Categoria"/></f:facet>
+<h:outputText value="#{lista1.tblCategorias.nombre_categoria}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Proveedor"/></f:facet>
+<h:outputText value="#{lista1.tblProveedores.nombre_proveedor}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Fecha Registro"/></f:facet>
+<h:outputText value="#{lista1.fecha_registro}">
+<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+</h:outputText>
+</p:column>
+<p:column colspan="2">
+<f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+<p:commandButton colspan="2" value="Modificar" oncomplete="PF('dialogModificarProducto').show()" update="formModificarProducto">
+<f:setPropertyActionListener target="#{productosBean.prod}" value="#{lista1}"></f:setPropertyActionListener>
+</p:commandButton>
+<p:commandButton colspan="2" value="Eliminar" oncomplete="PF('dialogEliminarProducto').show()" update="formEliminarProducto">
+<f:setPropertyActionListener target="#{productosBean.prod}" value="#{lista1}"></f:setPropertyActionListener>
+</p:commandButton>
+</p:column>
+</p:dataTable>
+</td>
+</tr>
+</table>
+</h:form>
+<h:form id="formAgregarProducto">
+<p:dialog id="dlgAgregarProducto" header="Agregar Producto" widgetVar="dialogAgregarProducto" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+<p:panelGrid columns="2" align="center">
+<p:outputLabel value="Codigo Producto"/>
+<p:inputText value="#{productosBean.prod.codigo}" required="true" requiredMessage="El Codigo es obligatorio"/>
+<p:outputLabel value="Descripcion Producto"/>
+<p:inputText value="#{productosBean.prod.descripcion}" required="true" requiredMessage="La Descripcion del producto es obligatorio"/>
+<p:outputLabel value="Stock"/>
+<p:inputText value="#{productosBean.prod.stock}" required="true" requiredMessage="Ingrese un Stock"/>
+<p:outputLabel value="Precio Compra"/>
+<p:inputText value="#{productosBean.prod.precio_compra}" required="true" requiredMessage="El Precio de Compra es obligatorio"/>
+<p:outputLabel value="Precio Venta"/>
+<p:inputText value="#{productosBean.prod.precio_venta}" required="true" requiredMessage="El Precio de Venta es obligatorio"/>
+<p:outputLabel value="Estado"/>
+<p:selectOneMenu value="#{productosBean.prod.estado}" required="true" requiredMessage="Seleccione un Estado">
+<f:selectItem itemLabel="--Seleccione un Estado--" itemValue="-1"></f:selectItem>
+<f:selectItem itemLabel="Desactivado" itemValue="Desactivado"></f:selectItem>
+<f:selectItem itemLabel="Activado" itemValue="Activado"></f:selectItem>
+</p:selectOneMenu>
+<p:outputLabel value="Categoria"/>
+<p:selectOneMenu value="#{productosBean.id_categoria}" required="true" requiredMessage="Seleccione una Categoria">
+<f:selectItem itemLabel="--Seleccione una Categoria--" itemValue=""></f:selectItem>
+<f:selectItems value="#{productosBean.listCategorias}"></f:selectItems>
+</p:selectOneMenu>
+<p:outputLabel value="Proveedor"/>
+<p:selectOneMenu value="#{productosBean.id_proveedor}" required="true" requiredMessage="Seleccione un Proveedor">
+<f:selectItem itemLabel="--Seleccione un Proveedor--" itemValue=""></f:selectItem>
+<f:selectItems value="#{productosBean.listProveedores}"></f:selectItems>
+</p:selectOneMenu>
+<p:outputLabel value="Fecha De Registro"/>
+<p:calendar value="#{productosBean.prod.fecha_registro}" required="true" requiredMessage="Ingrese una Fecha" mode="popup" showOn="button" popupIconOnly="true" pattern="dd/MM/yyyy"></p:calendar>
+</p:panelGrid>
+<p:commandButton value="Registrar" icon="ui-icon-disk" styleClass="btn btn-primary pull-left"  actionListener="#{productosBean.agregarProductos}" update="form2" oncomplete="PF('dialogAgregarProducto').hide()"/>
+<p:commandButton value="Cancelar" styleClass="btn btn-primary pull-right" oncomplete="PF('dialogAgregarProducto').hide()" immediate="true"/>
+</p:dialog>
+</h:form>
+
+<h:form id="formModificarProducto">
+<p:dialog id="dlgModificarProducto" header="Modificar Producto" widgetVar="dialogModificarProducto" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+<p:panelGrid columns="2" align="center">
+<p:outputLabel value="Codigo Producto"/>
+<p:inputText value="#{productosBean.prod.codigo}"/>
+<p:outputLabel value="Descripcion Producto"/>
+<p:inputText value="#{productosBean.prod.descripcion}"/>
+<p:outputLabel value="Stock"/>
+<p:inputText value="#{productosBean.prod.stock}"/>
+<p:outputLabel value="Precio Compra"/>
+<p:inputText value="#{productosBean.prod.precio_compra}"/>
+<p:outputLabel value="Precio Venta"/>
+<p:inputText value="#{productosBean.prod.precio_venta}"/>
+<p:outputLabel value="Estado"/>
+<p:selectOneMenu value="#{productosBean.prod.estado}">
+<f:selectItem itemLabel="--Seleccione un Estado--" itemValue="-1"></f:selectItem>
+<f:selectItem itemLabel="Desactivado" itemValue="Desactivado"></f:selectItem>
+<f:selectItem itemLabel="Activado" itemValue="Activado"></f:selectItem>
+</p:selectOneMenu>
+<p:outputLabel value="Categoria"/>
+<p:selectOneMenu value="#{productosBean.id_categoria}">
+<f:selectItem itemLabel="--Seleccione una Categoria--" itemValue=""></f:selectItem>
+<f:selectItems value="#{productosBean.listCategorias}"></f:selectItems>
+</p:selectOneMenu>
+<p:outputLabel value="Proveedor"/>
+<p:selectOneMenu value="#{productosBean.id_proveedor}">
+<f:selectItem itemLabel="--Seleccione un Proveedor--" itemValue=""></f:selectItem>
+<f:selectItems value="#{productosBean.listProveedores}"></f:selectItems>
+</p:selectOneMenu>
+<p:outputLabel value="Fecha De Registro"/>
+<p:calendar value="#{productosBean.prod.fecha_registro}" mode="popup" showOn="button" popupIconOnly="true" pattern="dd/MM/yyyy"></p:calendar>
+</p:panelGrid>
+<p:commandButton value="Modificar" actionListener="#{productosBean.modificarProducto}" update="form2" oncomplete="PF('dialogModificarProducto').hide()"/>
+<p:commandButton value="Cancelar"   oncomplete="PF('dialogModificarProducto').hide()"/>
+</p:dialog>
+</h:form>
+<h:form id="formEliminarProducto">
+<p:confirmDialog message="¿Desea eliminar el registro de este Producto?" header="Confimar!!" severity="alert" id="dlgEliminarProducto" widgetVar="dialogEliminarProducto" resizable="false" showEffect="explode" hideEffect="explode" modal="true" >
+		
+<p:commandButton value="SI"  actionListener="#{productosBean.eliminarProducto}" update="form2" oncomplete="PF('dialogEliminarProducto').hide()"/>
+<p:commandButton value="NO"   oncomplete="PF('dialogEliminarProducto').hide()"/>
+</p:confirmDialog>
+</h:form>
+</h:body>
+</html>

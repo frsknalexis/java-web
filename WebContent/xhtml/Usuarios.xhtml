@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Inventory-System Usuarios</title>
+    <link rel="icon" type="text/css" href="../imagenes/icono-negro.png"></link>
+    <!--===================================================
+      PLUGINS DE CSS
+  ====================================================-->
+    <link rel="StyleSheet" type="text/css" href="../bootstrap/css/bootstrap.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/Ionicons/css/ionicons.min.css" media="screen"></link>
+    <!-- Theme style -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/AdminLTE.css"></link>
+    <!-- AdminLTE Skins. -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/skins/_all-skins.min.css"></link>
+    <!-- DataTables-->
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/responsive.bootstrap.min.css"></link>
+   <!-- iCheck for checkboxes and radio inputs -->
+   <link rel="StyleSheet" type="text/css" href="../plugins/iCheck/all.css"></link>
+   <!--===================================================
+      PLUGINS DE JAVASCRIPT
+    ====================================================-->
+     <!-- jQuery 3 -->
+  <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- SlimScroll -->
+  <script type="text/javascript" src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script type="text/javascript" src="../bower_components/fastclick/lib/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script type="text/javascript" src="../dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <!-- DataTables-->
+  <script type="text/javascript" src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" src="../bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="../bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+  <!--Sweet Alert 2-->
+  <script type="text/javascript" src="../plugins/sweetalert2/sweetalert2.all.js"></script>
+  <!-- iCheck 1.0.1 -->
+<script type="text/javascript" src="../plugins/iCheck/icheck.min.js"></script>
+<!-- InputMask -->
+<script type="text/javascript" src="../plugins/input-mask/jquery.inputmask.js"></script>
+<script type="text/javascript" src="../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script type="text/javascript" src="../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!--jQuery Number-->
+<script type="text/javascript" src="../plugins/jQueryNumber/jquerynumber.min.js"></script> 
+</h:head>
+<h:body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<div class="wrapper">
+<header class="main-header">
+<a href="principal01.xhtml" class="logo">
+ <span class="logo-mini">
+ <img src="../imagenes/icono-blanco.png" class="img-responsive" style="padding:10px;"/>
+</span>
+<span class="logo-lg">
+<img src="../imagenes/logo-blanco-lineal.png" class="img-responsive" style="padding: 10px 0px;"></img>
+</span>
+ </a>
+ <nav class="navbar navbar-static-top" role="navigation">
+ <a href="#" class="sidebar-toggle" data-toggle="push-menu">
+ <span class="sr-only">Toggle navigation</span>
+ </a>
+ <div class="navbar-custom-menu">
+ <ul class="nav navbar-nav">
+ <li class="dropdown user user-menu">
+ <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+ <img src="../imagenes/usuarios/admin/686.jpg" class="user-image"></img>
+ <span class="hidden-xs"> Usuario del Sistema</span>
+ </a>
+ <ul class="dropdown-menu">
+ <li class="user-body">
+ <div class="pull-right">
+ <a href="../login.xhtml" class="btn btn-default btn-flat">Salir</a>
+ </div>
+ </li>
+ </ul>
+ </li>
+ </ul>
+ </div>
+ </nav>
+</header>
+<aside class="main-sidebar">
+<section class="sidebar">
+<ul class="sidebar-menu" data-widget="tree">
+<li class="active">
+<a href="principal01.xhtml">
+<i class="fa fa-home"></i>
+<span>Inicio</span>
+</a>
+</li>
+<li>
+<a href="Usuarios.xhtml">
+<i class="fa fa-user-plus"></i>
+<span>Usuarios</span>
+</a>
+</li>
+<li>
+<a href="Categorias.xhtml">
+<i class="fa fa-tags"></i>
+<span>Categorias</span>
+</a>
+</li>
+<li>
+<a href="Productos.xhtml">
+<i class="fa fa-cart-plus"></i>
+<span>Productos</span>
+</a>
+</li>
+<li>
+<a href="">
+<i class="fa fa-suitcase"></i>
+<span>Proveedores</span>
+</a>
+</li>
+<li>
+<a href="">
+<i class="fa fa-users"></i>
+<span>Clientes</span>
+</a>
+</li>
+<li class="treeview">
+<a href="#">
+<i class="fa fa-laptop"></i>
+<span>Ventas</span>
+<span class="pull-right-container">
+<i class="fa fa-angle-left pull-right"></i>
+</span>
+</a>
+<ul class="treeview-menu">
+<li>
+<a href="ventas">
+<i class="fa fa-tasks"></i>
+<span>Administrar Ventas</span>
+</a>
+</li>
+<li>
+<a href="crear-ventas">
+<i class="fa fa-cart-arrow-down"></i>
+<span>Crear Venta</span>
+</a>
+</li>
+<li>
+<a href="reportes">
+<i class="fa fa-bar-chart"></i>
+<span>Reporte de Ventas</span>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</aside>
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Administrar Usuarios
+        <small>Panel de Control</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="principal01.xhtml"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li class="active">Administrar Usuarios</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <p:commandButton value="Mostrar Usuarios" type="button" actionListener="#{usuariosBean.listarUsuariosGeneral}" onclick="PF('dlg3').show();"/>
+          <p:dialog header="Listado de Usuarios" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+          <h:outputText value="HDHSHDHS"></h:outputText></p:dialog>
+          </div>
+          
+        <div class="box-body">
+           <table class="table table-bordered table-striped table-hover dt-responsive tablas" width="100%">
+            <thead>
+            <tr>
+            <td colspan="2" align="center">Listado de Usuarios</td></tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td colspan="2">
+            <p:dataTable var="lista" value="#{usuariosBean.listaCargadaTodo}">
+<f:facet name="header"><h:outputText value="Listado"></h:outputText></f:facet>
+<p:column>
+<f:facet name="header">Nombres: </f:facet><h:outputText value="#{lista.nombres}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Usuario: </f:facet><h:outputText value="#{lista.usuario}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Estado: </f:facet><h:outputText value="#{lista.estado}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Perfil: </f:facet><h:outputText value="#{lista.perfil}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header">Fecha Registro: </f:facet><h:outputText value="#{lista.fecha_registro}">
+<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime></h:outputText>
+</p:column>
+<f:facet name="footer">Cantidad de registros: <h:outputText value="#{usuariosBean.tamano_lista}"></h:outputText>
+</f:facet>
+</p:dataTable>
+            </td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  
+  <!--==============================================
+      MODAL AGREGAR USUARIO
+    ===============================================-->
+
+    <!-- Modal-->
+    <div class="modal fade" id="modalAgregarUsuario" role="dialog">
+      <div class="modal-dialog">
+      <!-- Modal Content-->
+      <div class="modal-content">
+
+        <h:form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=======================================
+             CABEZA DEL MODAL
+        ========================================-->
+
+        <div class="modal-header" style="background: #3c8dbc; color: white;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar Usuario</h4>
+        </div>
+
+        <!--=======================================
+              CUERPO DEL MODAL
+        ========================================-->
+
+        <div class="modal-body">
+          <div class="box-body">
+            <!--ENTRADA PARA EL NOMBRE-->
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i>
+                </span><p:inputText type="text" styleClass="form-control input-lg" value="#{usuariosBean.usu.nombres}" placeholder="Ingresar Nombre"/>
+              </div>
+            </div>
+            <!--ENTRADA PARA EL USUARIO-->
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <p:inputText type="text" styleClass="form-control input-lg" value="#{usuariosBean.usu.usuario}" placeholder="Ingresar Usuario"/>
+              </div>
+            </div>
+            <!--ENTRADA PARA LA CONTRASEÑA-->
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <p:password type="password" styleClass="form-control input-lg" value="#{usuariosBean.usu.password}"  placeholder="Ingresar Password"/>
+              </div>
+            
+            </div>
+            <!--ENTRADA PARA SELECCIONAR SU PERFIL-->
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-desktop"></i></span>
+                <p:inputText type="text" styleClass="form-control input-lg" value="#{usuariosBean.usu.perfil}" placeholder="Ingresar Perfil"></p:inputText>
+              </div>
+            </div>
+            <!--ENTRADA PARA SELECCIONAR EL ESTADO -->
+            <div class="form-group">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-users"></i></span>
+            <p:inputText type="text" styleClass="form-control input-lg" value="#{usuariosBean.usu.estado}" placeholder="Ingresar Estado"/>
+            </div> 
+            </div>
+            <div class="form-group">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <p:inputText type="text" styleClass="form-control input-lg" value="#{usuariosBean.usu.fecha_registro}" placeholder="dd/mm/yyyy" required=""/>
+            </div>
+            </div>
+          </div>
+        </div>
+        <!--=======================================
+            PIE DEL MODAL
+        ========================================-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+         <p:commandButton value="Agregar Usuarios" actionListener="#{usuariosBean.agregarUsuarios}" icon="ui-icon-disk"></p:commandButton>
+        </div>
+      </h:form>
+      </div>
+    </div>
+  </div>
+  
+  <p:commandButton value="Mostrar Usuarios" type="button" actionListener="#{usuariosBean.listarUsuariosGeneral}" onclick="PF('dlg3').show();"/>
+          <p:dialog header="Listado de Usuarios" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+          <h:outputText value="HDHSHDHS"></h:outputText></p:dialog>
+  <footer class="main-footer">
+	<div class="pull-right hidden-xs">
+		<b>Version</b> 1.0.0
+	</div>
+	<strong>Copyright &copy; 2017-2018 <a href="https://adminlte.io" target="_blank">Almsaeed Studio</a>.</strong> Todos los derechos reservados.
+</footer> 
+</div>
+
+<script  type="text/javascript" src="../js/plantilla.js"></script>
+</h:body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Ventas-Crear Venta</title>
+    <link rel="icon" type="text/css" href="../imagenes/icono-negro.png"></link>
+    <h:outputStylesheet name="./css/Layout.css" />
+    
+     <!--===================================================
+      PLUGINS DE CSS
+  ====================================================-->
+    <link rel="StyleSheet" type="text/css" href="../bootstrap/css/bootstrap.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css" media="screen"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/Ionicons/css/ionicons.min.css" media="screen"></link>
+    <!-- Theme style -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/AdminLTE.css"></link>
+    <!-- AdminLTE Skins. -->
+    <link rel="StyleSheet" type="text/css" href="../dist/css/skins/_all-skins.min.css"></link>
+    <!-- DataTables-->
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+    <link rel="StyleSheet" type="text/css" href="../bower_components/datatables.net-bs/css/responsive.bootstrap.min.css"></link>
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="StyleSheet" type="text/css" href="../plugins/iCheck/all.css"></link>
+   
+</h:head>
+<h:body class="login-page">
+<div id="back"></div>
+<h:form>
+<p:menubar>
+<p:submenu label="Inicio" icon="ui-icon-document">
+<p:menuitem value="Pagina Inicio" url="/xhtml/principal.xhtml"/>
+<p:separator />
+<p:menuitem value="Salir" url="../login.xhtml" />
+</p:submenu>
+<p:submenu label="Usuarios" icon="ui-icon-pencil">
+<p:menuitem value="USUARIOS" url="/xhtml/ListarUsuarios.xhtml" actionListener="#{usuariosBean.listarUsuariosGeneral}" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Categorias" icon="ui-icon-pencil">
+<p:menuitem value="CATEGORIAS" url="/xhtml/ListarCategorias.xhtml" actionListener="#{categoriasBean.listarCategoriasGeneral}"  icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+<p:submenu label="Proveedores" icon="ui-icon-pencil">
+<p:menuitem value="PROVEEDORES" url="/xhtml/ListarProveedores.xhtml" actionListener="#{proveedoresBean.listarProveedoresGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Productos" icon="ui-icon-pencil">
+<p:menuitem value="PRODUCTOS" url="/xhtml/ListarProductos.xhtml" actionListener="#{productosBean.listarProductosGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Clientes" icon="ui-icon-pencil">
+<p:menuitem value="CLIENTES" url="/xhtml/ListarClientes.xhtml" actionListener="#{clientesBean.listarClientesGeneral}" icon="ui-icon-arrowreturnthick-1-w" />
+</p:submenu>
+<p:submenu label="Ventas" icon="ui-icon-help">
+<p:menuitem value="VENTAS" url="/xhtml/ListarVentas.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+<p:menuitem value="CREAR VENTA" url="/xhtml/CrearVenta.xhtml" icon="ui-icon-arrowreturnthick-1-w"/>
+</p:submenu>
+</p:menubar>
+</h:form>
+<h:form>
+<h:panelGrid style="width:900px; margin:0 auto; background-color:#E9DDF9;">
+<p:commandButton value="Nueva Venta" actionListener="#{ventasBean.numeracionVenta}" styleClass="btn btn-info" icon="ui-icon-disk" style="width:150px;"
+update=":formFactura" action="#{ventasBean.enabledButton}"/>
+</h:panelGrid>
+</h:form>
+<h:form id="formFactura">
+<p:growl id="mensajeGeneral" autoUpdate="true" showDetail="true" life="3000"/>
+<p:panel header="Realizar Venta" style="width:900px; margin:0 auto; text-align:center; background-color:#E9DDF9;">
+<p:layout id="capaDatosClienteVenta" style="width:100%; height:280px; background-color:#E9DDF9;">
+<p:layoutUnit id="datosCliente" position="center" style="padding:5px; text-align:justify; font-size:14px;" size="300">
+
+<h:panelGrid id="gridBuscarDatosCliente" columns="5">
+<p:outputLabel value="Codigo Cliente: " style="font-weight:bold;"/>
+<p:inputText id="txtBuscarCliente" style="width:150px;height:30px;" styleClass="form-control" value="#{ventasBean.codigo_cliente}"
+converter="#{Integer}" converterMessage="El codigo del Cliente debe ser Numerico" disabled="#{!ventasBean.enabled}">
+<p:ajax event="keyup" listener="#{ventasBean.agregarDatosClientes2}" update=":formFactura:gridDatosCliente :formFactura:txtBuscarCliente"/>
+</p:inputText>
+<p:commandButton value="..." oncomplete="PF('dialogClientes').show()" update=":formFactura:dlgClientes" style="height:30px;" disabled="#{!ventasBean.enabled}"/>
+<p:outputLabel value="Fecha: " style="font-weight:bold;"/>
+<p:outputLabel value="#{ventasBean.fechaSistema}"/>
+
+</h:panelGrid>
+<p:separator/>
+<h:panelGrid id="gridDatosCliente" columns="2">
+<p:outputLabel value="Nombre Cliente: " style="font-weight:bold;"/>
+<p:outputLabel id="lblNombreCliente" value="#{ventasBean.cl.nombre_cliente}"/>
+<p:outputLabel value="Numero Documento: " style="font-weight:bold;"/>
+<p:outputLabel id="lblNumDocCliente" value="#{ventasBean.cl.num_documento}"/>
+</h:panelGrid>
+<p:separator/>
+
+<h:panelGrid id="gridBuscarDatosVendedor" columns="3">
+<p:outputLabel value="Codigo Vendedor: " style="font-weight:bold;"/>
+<p:inputText id="txtBuscarVendedor" styleClass="form-control" style="width:130px; height:30px;" value="#{ventasBean.codigo_vendedor}"
+converter="#{Integer}" converterMessage="El Codigo del Vendedor debe de ser Numerico" disabled="#{!ventasBean.enabled}">
+<p:ajax event="keyup" listener="#{ventasBean.agregarDatosVendedor2}" update=":formFactura:gridDatosVendedor :formFactura:txtBuscarVendedor"/>
+</p:inputText>
+<p:commandButton value="..." oncomplete="PF('dialogVendedor').show()" update=":formFactura:dlgVendedor" style="height:30px;" disabled="#{!ventasBean.enabled}"/>
+</h:panelGrid>
+<p:separator/>
+<h:panelGrid id="gridDatosVendedor" columns="2">
+<p:outputLabel value="Nombre Vendedor: " style="font-weight:bold;"/>
+<p:outputLabel id="lblNombreVendedor" value="#{ventasBean.usu.nombres}"/>
+</h:panelGrid>
+</p:layoutUnit>
+<p:layoutUnit id="datosVenta" position="east" style="padding:5px; text-align:center; font-size:14px;" size="200">
+<h:panelGrid columns="1" style="font-size:24px; font-weight:bold; margin-top:30px; margin:0 auto;">
+CODIGO VENTA
+<p:outputLabel value="#{ventasBean.codigo_venta}"/>
+</h:panelGrid>
+</p:layoutUnit>
+</p:layout>
+<p:separator/>
+
+<h:panelGrid id="gridBuscarProducto" columns="3">
+<p:outputLabel value="Codigo Producto: "/>
+<p:inputText id="txtBuscarProducto" styleClass="form-control" style="width:130px; height:30px;" value="#{ventasBean.id_producto}"
+converter="#{Integer}" converterMessage="El Codigo del Producto debe ser Numerico" disabled="#{!ventasBean.enabled}">
+<p:ajax event="keyup" listener="#{ventasBean.mostrarCantidadProducto2}" update=":formFactura:gridBuscarProducto"></p:ajax>
+</p:inputText>
+<p:commandButton value="..." oncomplete="PF('dialogProductos').show()" update=":formFactura:dlgProductos" disabled="#{!ventasBean.enabled}"/>
+</h:panelGrid>
+<p:separator/>
+<p:dataTable id="tablaProductosVenta" var="det" value="#{ventasBean.listaDetalleVenta}" editable="true" paginator="true" rows="5" reflow="true" 
+paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+rowsPerPageTemplate="5,10,15" rowIndexVar="rowIndex">
+<p:ajax event="rowEdit" listener="#{ventasBean.onRowEdit}" update=":formFactura:tablaProductosVenta :formFactura:gridTotalVenta"/>
+<p:ajax event="rowEditCancel" listener="#{ventasBean.onRowCancel}" update=":formFactura:tablaProductosVenta :formFactura:gridTotalVenta"/>
+<p:column>
+<f:facet name="header"><h:outputText value="Codigo Producto"/></f:facet>
+<h:outputText value="#{det.codigo}"/>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Producto"/></f:facet>
+<h:outputText value="#{det.descripcion}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Precio Venta"/></f:facet>
+S/. <h:outputText value="#{det.precio_venta}">
+<f:convertNumber  currencySymbol="" type="currency" minFractionDigits="2"/>
+</h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Cantidad"/></f:facet>
+<p:cellEditor>
+<f:facet name="output"><h:outputText value="#{det.cantidad}"/></f:facet>
+<f:facet name="input"><p:inputText value="#{det.cantidad}" label="Cantidad Producto"
+required="true" requiredMessage="Es Necesario Ingresar una Cantidad" converter="#{Integer}"
+converterMessage="Esta no es una Cantidad Correcta" validatorMessage="La Cantidad debe ser mayor o igual a 1">
+<f:validateLongRange minimum="1"/>
+</p:inputText></f:facet>
+</p:cellEditor>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Total"/></f:facet>
+s/. <h:outputText value="#{det.total}"/>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Editar Cantidad"/></f:facet>
+<p:rowEditor/>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Quitar Producto"/></f:facet>
+<p:commandLink value="X" actionListener="#{ventasBean.quitarProductoDetalleVenta2(det.codigo, rowIndex)}" title="Quitar Producto" style="text-decoration: none; color: #3390FF"
+update=":formFactura:tablaProductosVenta :formFactura:gridTotalVenta"/>
+</p:column>
+</p:dataTable>
+<p:separator/>
+<h:panelGrid id="gridTotalVenta" columns="2" style="font-size:15px; font-weight:bold; margin:0 auto; text-align:justify; width:300px; height:150px;">
+<p:outputLabel value="SubTotal: S/. " style="padding:5px 0px 5px 20px;"/> 
+<p:inputText style="width:160px; height:30px;" styleClass="form-control"  value="#{ventasBean.subtotal}">
+</p:inputText>
+<p:outputLabel value="IGV: " style="padding:0px 0px 0px 20px;"/>
+<p:spacer/>
+<p:inputText style="width:70px; height:30px; margin-left:20px;" styleClass="form-control" value="#{ventasBean.impuesto}" converter="#{Integer}"
+converterMessage="Ingrese un valor Correcto">
+<p:ajax event="keyup" listener="#{ventasBean.TotalVenta}" update=":formFactura:gridTotalVenta"/>
+</p:inputText>
+<p:inputText style="width:160px; height:30px;" styleClass="form-control" value="#{ventasBean.precio_impuesto}">
+</p:inputText>
+<p:outputLabel value="Total Venta: S/. " style="padding: 5px 0px 5px 20px;"/>  
+<p:inputText style="width:160px;height:30px;" styleClass="form-control" value="#{ventasBean.totalVenta}">
+</p:inputText>
+</h:panelGrid>
+<p:separator/>
+<p:commandButton value="Registrar Venta" actionListener="#{ventasBean.agregarVenta}" icon="ui-icon-disk"
+update=":formFactura" disabled="#{!ventasBean.enabled}" action="#{ventasBean.disabledButton}"/>
+<p:commandButton value="Imprimir" disabled="#{!ventasBean.enabled}"/>
+<p:commandButton value="Cancelar" action="#{ventasBean.Limpiar}" update=":formFactura" disabled="#{!ventasBean.enabled}"/>
+</p:panel>
+
+<p:dialog id="dlgClientes" widgetVar="dialogClientes" style="width:700px;" modal="true" resizable="false" showEffect="explode" hideEffect="explode">
+<p:dataTable id="tablaClientes" style="width:700px;" rows="10" var="lista1" value="#{ventasBean.listaClientes}" paginator="true">
+<f:facet name="header">
+<h:outputText value="Listado de Clientes"/>
+</f:facet>
+<p:column>
+<f:facet name="header"><h:outputText value="ID"/></f:facet>
+<h:outputText value="#{lista1.id_cliente}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Nombre Cliente"/>
+</f:facet>
+<h:outputText value="#{lista1.nombre_cliente}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Tipo Documento"/></f:facet>
+<h:outputText value="#{lista1.tipo_documento}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Nro Documento"/></f:facet>
+<h:outputText value="#{lista1.num_documento}"></h:outputText>
+</p:column>
+<p:column colspan="2">
+<f:facet name="header"><h:outputText value="Accion"/></f:facet>
+<p:commandButton colspan="2" value="Seleccionar" actionListener="#{ventasBean.agregarDatosClientes(lista1.id_cliente)}" oncomplete="PF('dialogClientes').hide()" update=":formFactura:gridDatosCliente">
+</p:commandButton>
+</p:column>
+</p:dataTable>
+<p:commandButton value="Cerrar" onclick="PF('dialogClientes').hide()"/>
+</p:dialog>
+
+<p:dialog id="dlgVendedor" widgetVar="dialogVendedor" modal="true" resizable="false" showEffect="explode" hideEffect="explode">
+<p:dataTable id="tablaVendedor" style="width:700px;" rows="10" var="lista1" value="#{ventasBean.listaVendedor}" paginator="true">
+<f:facet name="header">
+<h:outputText value="Listado de Usuarios"/>
+</f:facet>
+<p:column>
+<f:facet name="header"><h:outputText value="ID"/></f:facet>
+<h:outputText value="#{lista1.id_usuario}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Nombre Usuario"/>
+</f:facet>
+<h:outputText value="#{lista1.nombres}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Estado"/></f:facet>
+<h:outputText value="#{lista1.estado}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Perfil"/></f:facet>
+<h:outputText value="#{lista1.perfil}"></h:outputText>
+</p:column>
+<p:column colspan="2">
+<f:facet name="header"><h:outputText value="Accion"/></f:facet>
+<p:commandButton colspan="2" value="Seleccionar" actionListener="#{ventasBean.agregarDatosVendedor(lista1.id_usuario)}" oncomplete="PF('dialogVendedor').hide()" update=":formFactura:gridDatosVendedor">
+</p:commandButton>
+</p:column>
+</p:dataTable>
+<p:commandButton value="Cerrar" onclick="PF('dialogVendedor').hide()" />
+</p:dialog>
+<p:dialog id="dlgProductos" widgetVar="dialogProductos" modal="true" resizable="false" showEffect="explode" hideEffect="explode">
+<p:dataTable id="tablaProductos" style="width:1100px;" rows="10" var="lista1" value="#{ventasBean.listaProductos}" paginator="true" emptyMessage="No hay datos de productos">
+<f:facet name="header">
+<h:outputText value="Listado de Productos"/>
+</f:facet>
+<p:column>
+<f:facet name="header"><h:outputText value="ID"/></f:facet>
+<h:outputText value="#{lista1.id_producto}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Codigo Producto"/>
+</f:facet>
+<h:outputText value="#{lista1.codigo}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Descripcion Producto"/></f:facet>
+<h:outputText value="#{lista1.descripcion}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Stock"/></f:facet>
+<h:outputText value="#{lista1.stock}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Precio Venta"/></f:facet>
+<h:outputText value="#{lista1.precio_venta}">
+<f:convertNumber type="currency" currencySymbol="S/. " minFractionDigits="2"/>
+</h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Categoria"/></f:facet>
+<h:outputText value="#{lista1.tblCategorias.nombre_categoria}"></h:outputText>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="Proveedor"/></f:facet>
+<h:outputText value="#{lista1.tblProveedores.nombre_proveedor}"></h:outputText>
+</p:column>
+<p:column colspan="2">
+<f:facet name="header"><h:outputText value="Acciones"/></f:facet>
+<p:commandButton colspan="2" value="Seleccionar" actionListener="#{ventasBean.pedirCantidadProducto(lista1.id_producto)}" oncomplete="PF('dialogCantidadProducto').show()" update=":formFactura:dlgCantidadProducto"/>
+</p:column>
+</p:dataTable>
+<p:commandButton value="Cerrar" onclick="PF('dialogProductos').hide()"/>
+</p:dialog>
+<p:dialog id="dlgCantidadProducto" widgetVar="dialogCantidadProducto" header="Cantidad" modal="true">
+Cantidad de Producto a Vender: <p:inputText id="txtCantidadProducto" value="#{ventasBean.cantidad}"/>
+<p:commandButton value="Aceptar" actionListener="#{ventasBean.agregarDatosProducto}" update=":formFactura:tablaProductosVenta :formFactura:dlgCantidadProducto :formFactura:gridTotalVenta" 
+oncomplete="PF('dialogCantidadProducto').hide(); PF('dialogProductos').hide()"/>
+</p:dialog>
+<p:dialog id="dlgCantidadProducto2" widgetVar="dialogCantidadProducto2" header="Cantidad" modal="true">
+Cantidad de Producto a Vender: <p:inputText id="txtCantidadProducto2" value="#{ventasBean.cantidad2}"/>
+<p:commandButton value="Aceptar" actionListener="#{ventasBean.agregarDatosProducto2}" update=":formFactura:tablaProductosVenta :formFactura:dlgCantidadProducto2 :formFactura:gridTotalVenta"
+oncomplete="PF('dialogCantidadProducto2').hide()"/>
+</p:dialog>
+</h:form>
+</h:body>
+</html>
