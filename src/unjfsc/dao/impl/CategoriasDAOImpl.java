@@ -142,5 +142,8 @@ public class CategoriasDAOImpl implements CategoriasDAOLocal {
 		}
 	}
 	
+	public void modificarEstadoCategoria(Categorias obj) throws Exception {
+		
+	}
 
 }

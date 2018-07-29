@@ -11,5 +11,6 @@ public interface CategoriasDAOLocal {
 	public abstract List<Categorias> listarCategoriasGeneral() throws Exception;
 	public abstract void eliminarCategorias(Categorias obj) throws Exception;
 	public abstract void modificarCategorias(Categorias obj) throws Exception;
+	public abstract void modificarEstadoCategoria(Categorias obj) throws Exception;
 
 }
